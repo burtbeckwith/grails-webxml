@@ -1,5 +1,10 @@
 package grails.plugin.webxml
 
+/**
+ * Map of desired filters and positions.
+ * 
+ * @author Burt Beckwith
+ */
 class FilterManager {
 
 	static final int DEFAULT_POSITION = 500
@@ -17,6 +22,12 @@ class FilterManager {
 		sitemesh:           SITEMESH_POSITION,
 		urlMapping:         URL_MAPPING_POSITION]
 
+	/**
+	 * Register a named filter at the specified position.
+	 * 
+	 * @param name
+	 * @param position
+	 */
 	void registerWebXmlFilterPosition(String name, int position) {
 		filterOrder[name] = position
 	}

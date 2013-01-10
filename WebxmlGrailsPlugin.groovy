@@ -52,6 +52,11 @@ class WebxmlGrailsPlugin {
 		[name: 'Stefano Gualdi', email: 'stefano.gualdi@gmail.com']
 	]
 
+	/**
+	 * Process the web.xml file, modifying it as specified in the available configurations.
+	 * 
+	 * Note that filter ordering is handled in the _Events.groovy script for this plugin.
+	 */
 	def doWithWebDescriptor = { xml ->
 		def config = getConfig()
 		if (!config) {
@@ -122,6 +127,14 @@ class WebxmlGrailsPlugin {
 		}
 	}
 
+	/**
+	 * Load the default configuration and merge in the application specific 
+	 * configuration file, if provided.
+	 * 
+	 * Provides log info and warning messages about which are found.
+	 * 
+	 * @return configuration, or null if none available.
+	 */
 	private getConfig() {
 		GroovyClassLoader loader = new GroovyClassLoader(getClass().classLoader)
 

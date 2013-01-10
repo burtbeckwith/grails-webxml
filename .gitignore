@@ -6,3 +6,5 @@
 /web-app
 /target
 plugin.xml
+
+/target-eclipse/

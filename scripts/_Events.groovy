@@ -4,7 +4,14 @@ import groovy.xml.XmlUtil
 import groovy.xml.dom.DOMCategory
 
 /**
- * Re-write the web.xml to order the servlet filters the way we need
+ * Handle WebXmlEnd event which is generated in GroovyProjectManager.generateWebXml method
+ * after all doWithWebDescriptor methods have been called on all plugins.
+ * 
+ * Note that generateWebXml is called at application load time in a development environment,
+ * prior to packaging the application, and thus during execution of Grails war or
+ * package scripts.
+ * 
+ * This rewrites the web.xml to order the servlet filters the way we need.
  */
 eventWebXmlEnd = { String filename ->
 	try {
@@ -16,6 +23,10 @@ eventWebXmlEnd = { String filename ->
 	}
 }
 
+/**
+ * Sort the filter-mapping definitions into order per the positions provided
+ * by the getXmlFilterOrder methods defined on plugins.
+ */
 private void fixWebXml() {
 
 	def wxml = DOMBuilder.parse(new StringReader(webXmlFile.text)).documentElement
