@@ -8,3 +8,7 @@
 plugin.xml
 
 /target-eclipse/
+
+.gradle
+/build
+.nb-gradle

@@ -1,3 +1,6 @@
+package webxml
+
+import grails.plugins.*
 import grails.util.Environment
 import groovy.xml.StreamingMarkupBuilder
 import groovy.xml.XmlUtil
@@ -27,16 +30,16 @@ import org.slf4j.LoggerFactory
  *   1.3 Burt Beckwith; added new feature to order filter-mapping elements
  *   1.4 Stefano Gualdi; added patch from Daniel Bower to support session-timeout setting
  */
-class WebxmlGrailsPlugin {
 
-	private static final String DEFAULT_CONFIG_FILE = 'DefaultWebXmlConfig'
+class WebxmlGrailsPlugin extends Plugin {
+    private static final String DEFAULT_CONFIG_FILE = 'DefaultWebXmlConfig'
 	private static final String APP_CONFIG_FILE     = 'WebXmlConfig'
 
 	private Logger log = LoggerFactory.getLogger('grails.plugin.webxml.WebxmlGrailsPlugin')
-
-	def version = '1.4.1'
-	def grailsVersion = '1.2 > *'
-	def author = 'Roger Cass'
+    // the version or versions of Grails the plugin is designed for
+    def grailsVersion = "3.0.1 > *"
+    
+    def author = 'Roger Cass'
 	def authorEmail = 'roger.cass@byu.net'
 	def title = 'web.xml plugin'
 	def description = 'Add additional features to your web.xml, such as Filters, Config Listeners or Context Parameter definitions'
@@ -155,7 +158,7 @@ class WebxmlGrailsPlugin {
 	 * 
 	 * @return configuration, or null if none available.
 	 */
-	private getConfig() {
+	public grails.config.Config getConfig() {
 		GroovyClassLoader loader = new GroovyClassLoader(getClass().classLoader)
 
 		def config
